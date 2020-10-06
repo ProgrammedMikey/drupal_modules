@@ -1,0 +1,35 @@
+<?php
+
+
+//hook permissions
+function hook_pp_announcement_permission() {
+    return array(
+      'access pp_announcement' => array(
+        'title' => t('Access PP Annoucement'),
+        'description' => t('Access PP Announcement module'),
+      ),
+    );
+  }
+
+//Hook_menu
+function pp_announcement_menu() {
+
+    $items = [];
+    
+    	// create [modal]
+	$items['announcement/create/%/%ctools_js'] = [
+		'title' => t('Create Formal Announcement'),
+		'file' => 'inc/pp_announcement_create.inc',
+		'file path' => drupal_get_path('module', 'pp_announcement'),
+		'page callback' => '_pp_announcement_create_ajax_callback',
+		'page arguments' => [5],
+		// 'access callback' => '_pp_contact_permission_user_has_role',
+		// 'access arguments' => [['admin', 'partner_master', 'partner_demo', 'partner_sales']],
+		'menu_name' => 'main-menu',
+		'type' => MENU_CALLBACK,
+	];
+	
+    
+ 
+  return $items;
+}
