@@ -1,0 +1,4 @@
+name = "Partner Portal Formal Announcement" 
+description = "Formal announcement for all Partner Portal users"
+core = "7.x"
+package = "Partner Portal"

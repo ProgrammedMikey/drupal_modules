@@ -1,0 +1,32 @@
+<?php
+
+// implements hook_permissions
+function pp_formal_announcement_permission() {
+
+    return array(
+        'submit pp_formal_announcement' => array(
+            'title' => t('submit the pp_formal_announcement form'), 
+            'description' => t('submit the form_example form'),
+        ), 
+    );
+}
+
+function pp_formal_announcement_menu() {
+
+        $items = [];
+        
+            // create [modal]
+        $items['formal/announcement/create'] = [
+            'title' => t('Create Formal Announcement'),
+            'file' => 'inc/pp_formal_announcement_create.inc',
+            'file path' => drupal_get_path('module', 'pp_formal_announcement'),
+            'page callback' => 'drupul_get_form',
+            'page arguments' => array('_pp_formal_announcement_create_form'),
+            // 'access callback' => '_pp_contact_permission_user_has_role',
+            // 'access arguments' => [['admin', 'partner_master', 'partner_demo', 'partner_sales']],
+            'access arguments' => array('submit pp_announcement'),
+            'menu_name' => 'main-menu',
+            'type' => MENU_CALLBACK,
+        ];
+      return $items;
+} 

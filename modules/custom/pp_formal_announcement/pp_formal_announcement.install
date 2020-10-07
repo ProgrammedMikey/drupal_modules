@@ -1,0 +1,31 @@
+<?php 
+
+
+function pp_formal_announcement() {
+$schema = array();
+
+$schema['formal_announcement'] = array(
+    'description' => 'The base table for nodes.',
+    'fields' => array(
+      'announcement_id' => array(
+        'description' => 'The primary identifier for a node.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE),
+      'announcement_url' => array(
+        'description' => 'The url of this node.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => ''),
+      'announcement_content' => array(
+        'description' => 'The title of this node, always treated a non-markup plain text.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => ''),
+      ),
+    'primary key' => array('announcement_id'),
+  );
+return $schema;
+}

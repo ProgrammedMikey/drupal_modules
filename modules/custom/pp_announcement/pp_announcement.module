@@ -2,14 +2,15 @@
 
 
 //hook permissions
-function hook_pp_announcement_permission() {
-    return array(
-      'access pp_announcement' => array(
-        'title' => t('Access PP Annoucement'),
-        'description' => t('Access PP Announcement module'),
-      ),
-    );
-  }
+// function hook_pp_announcement_permission() {
+//     return array(
+//       'submit pp_announcement' => array(
+//         'title' => t('Submit PP Annoucement'),
+//         'description' => t('Submit PP Announcement module'),
+//       ),
+// 	); 
+	
+//   } 
 
 //Hook_menu
 function pp_announcement_menu() {
@@ -17,7 +18,7 @@ function pp_announcement_menu() {
     $items = [];
     
     	// create [modal]
-	$items['announcement/create/%/%ctools_js'] = [
+	$items['announcement/create/%ctools_js'] = [
 		'title' => t('Create Formal Announcement'),
 		'file' => 'inc/pp_announcement_create.inc',
 		'file path' => drupal_get_path('module', 'pp_announcement'),
@@ -25,11 +26,43 @@ function pp_announcement_menu() {
 		'page arguments' => [5],
 		// 'access callback' => '_pp_contact_permission_user_has_role',
 		// 'access arguments' => [['admin', 'partner_master', 'partner_demo', 'partner_sales']],
+		'access arguments' => array('submit pp_announcement'),
 		'menu_name' => 'main-menu',
 		'type' => MENU_CALLBACK,
 	];
 	
-    
- 
   return $items;
 }
+
+//hook_block_info()
+function pp_announcement_block_info() {
+
+	
+	$blocks['create_announcement'] = array(
+	  'info' => t('Create formal announcement'),
+	);
+	
+	return $blocks;
+} 
+
+function pp_announcement_block_view($delta = '') {
+
+	$block = array();
+	switch ($delta) {
+	  case 'create_announcement':
+		ctools_include('ajax');
+		ctools_include('modal');
+		ctools_modal_add_js();
+		$block['subject'] = t('Create formal announcement');
+		$block['content'] = array(
+		  '#url' => 'announcement/create/nojs',
+		  '#title' => t('Create formal announcement'),
+		  'html' => TRUE,
+		  'attributes' => array('class' => "ctools-use-modal")
+		);
+
+		break;
+	}
+	return $block;
+  }
+

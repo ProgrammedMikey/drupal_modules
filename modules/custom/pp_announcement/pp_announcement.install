@@ -1,0 +1,86 @@
+<?php 
+
+function _pp_announcement_schema() {
+
+
+
+  $schema['pp_announcement'] = array(
+    'description' => 'Table to create formal announcements to Partners',
+    'fields' => array(
+      'pp_announcement_id' => array(
+        'description' => 'Partner Portal formal announcement ID',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'size' => 'big',
+        'not null' => TRUE,
+      ),
+      'pp_announcement_content' => array(
+        'description' => 'Partner Portal formal announcement content body',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'pp_announcement_url' => array(
+        'description' => 'Partner Portal formal announcement url',
+        'type' => 'varchar',
+        'length' => '32',
+        'not null' => TRUE,
+      ),
+      'pp_announcement_expiration_datetime' => array(
+        'description' => 'Partner Portal formal announcement ID expiration',
+        'type' => 'date',
+        'not null' => TRUE,
+      ),
+    ),
+    'unique keys' => array(
+      'pp_announcement_id' => array('pp_announcement_id')
+    ),
+  );
+  return $schema;
+}  
+
+
+// $schema['pp_announcement'] = array(
+//     'description' => 'Table to create formal announcements to Partners.',
+//     'fields' => array(
+//       'pp_announcement_id' => array(
+//         'description' => 'The primary identifier for the table',
+//         'type' => 'serial',
+//         'unsigned' => TRUE,
+//         'not null' => TRUE),
+//       'pp_announcement_content' => array(
+//         'description' => 'The content body of the announcement.',
+//         'type' => 'varchar',
+//         'length' => 255,
+//         'not null' => TRUE,
+//         'default' => ''),
+//         'pp_announcement_url' => array(
+//             'description' => 'Optional URL for the formal announcement.',
+//             'type' => 'varchar',
+//             'length' => 32,
+//             'not null' => FALSE,
+//             'default' => ''),
+//         'pp_announcement_expiration_datetime' => array(
+//             'type' => 'datetime',
+//             'mysql_type' => 'datetime',
+//         ),
+//       'created' => array(
+//         'description' => 'The Unix timestamp when the node was created.',
+//         'type' => 'int',
+//         'not null' => TRUE,
+//         'default' => 0),
+//       'changed' => array(
+//         'description' => 'The Unix timestamp when the node was most recently saved.',
+//         'type' => 'int',
+//         'not null' => TRUE,
+//         'default' => 0),
+//       ),
+//     'indexes' => array(
+//       'node_changed'        => array('changed'),
+//       'node_created'        => array('created'),
+//       ),
+//     'primary key' => array('pp_announcement_id'),
+//   );
+
+//   return $schema;
+// }
